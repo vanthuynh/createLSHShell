@@ -1,3 +1,9 @@
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
 /*
   Function Declarations for builtin shell commands:
  */
@@ -85,7 +91,24 @@ int lsh_launch(char **args)
     return 1;
 }
 
-// #define LSH_RL_BUFSIZE 1024
+int lsh_execute(char **args)
+{
+    int i;
+
+    if (args[0] == NULL) {
+        // An empty command was entered.
+        return 1;
+    }
+
+    for (i = 0; i < lsh_num_builtins(); i++) {
+        if (strcmp(args[0], builtin_str[i]) == 0) {
+            return (*builtin_func[i])(args);
+        }
+    }
+
+    return lsh_launch(args);
+}
+
 char *lsh_read_line(void)
 {
   char *line = NULL;
