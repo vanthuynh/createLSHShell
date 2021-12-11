@@ -48,7 +48,7 @@ int lsh_cd(char **args)
 int lsh_help(char **args)
 {
     int i;
-    printf("Stephen Brennan's LSH\n");
+    printf("Van Huynh's LSH (Special Thanks to Stephen Brennan)\n");
     printf("Type program names and arguments, and hit enter.\n");
     printf("The following are built in:\n");
 
